@@ -15,8 +15,11 @@ import java.util.Map;
 public class ApiSpec {
     @Id
     private String id;
-    private String path;
-    private String method;
+
+    private String name;           // Matches "name" in Postman
+    private String endpointPath;   // Matches "endpointPath" in Postman
+    private String method;         // Add this to capture "method" if you send it
+
     private Map<String, String> fields;
     private String mockContext;
 }
