@@ -16,9 +16,12 @@ public class MockService {
     public String generateMock(String id) {
         ApiSpec spec = repository.findById(id).orElseThrow(() -> new RuntimeException("Spec not found"));
 
-        String prompt = "Generate one JSON object with these fields: " + spec.getFields() +
-                ". Context: " + spec.getMockContext() +
-                ". Return ONLY valid JSON.";
+        String prompt = String.format(
+                "Generate one realistic JSON object. Fields: %s. Context: %s. " +
+                        "Output MUST be raw JSON only. Do not include any intro, explanation, or markdown blocks.",
+                spec.getFields().toString(),
+                spec.getMockContext()
+        );
         return chatModel.call(prompt);
     }
 }
